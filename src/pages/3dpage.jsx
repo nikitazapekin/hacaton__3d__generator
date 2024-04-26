@@ -2,9 +2,13 @@ import RestaurantPreview from "../components/RestaurantPreview/RestaurantPreview
 
 
 const ContentPage = () => {
-    return ( <>
-    <RestaurantPreview />
-    </> );
-}
+
  
+    return (<>
+        <RestaurantPreview />
+      
+
+    </>);
+}
+
 export default ContentPage;

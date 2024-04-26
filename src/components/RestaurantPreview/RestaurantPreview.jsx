@@ -401,55 +401,55 @@ extend({ OrbitControls });
 
 
 function Cube() {
-    const meshRef = useRef();
+  const meshRef = useRef();
 
   const [isHovered, setIsHovered] = useState(false);
-  
-    useFrame(() => {
-        if (!isHovered) {
-            meshRef.current.rotation.x += 0.01;
-            meshRef.current.rotation.y += 0.01;
-        }
-    });
 
-    return (
-        <mesh
-            ref={meshRef}
-            onPointerOver={() => setIsHovered(true)}
-            onPointerOut={() => setIsHovered(false)}
-            position={[0, 0, 0]}
-        >
-            <boxGeometry args={[4, 4, 4]} />
-            <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
-        </mesh>
-    );
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <boxGeometry args={[4, 4, 4]} />
+      <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
 }
 
 
 
 
 function Pyramid() {
-    const meshRef = useRef();
-    const [isHovered, setIsHovered] = useState(false);
-    
-    useFrame(() => {
-        if (!isHovered) {
-            meshRef.current.rotation.x += 0.01;
-            meshRef.current.rotation.y += 0.01;
-        }
-    });
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
 
-    return (
-        <mesh
-            ref={meshRef}
-            onPointerOver={() => setIsHovered(true)}
-            onPointerOut={() => setIsHovered(false)}
-            position={[0, 0, 0]}
-        >
-            <coneGeometry args={[2, 4, 4]} />  
-            <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
-        </mesh>
-    );
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <coneGeometry args={[2, 4, 4]} />
+      <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
 }
 
 /*
@@ -508,145 +508,134 @@ function Box() {
 
 
 function Box() {
-    const meshRef = useRef();
-    const [isHovered, setIsHovered] = useState(false);
-    
-    useFrame(() => {
-        if (!isHovered) {
-            meshRef.current.rotation.x += 0.01;
-            meshRef.current.rotation.y += 0.01;
-        }
-    });
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
 
-    return (
-        <mesh
-            ref={meshRef}
-            onPointerOver={() => setIsHovered(true)}
-            onPointerOut={() => setIsHovered(false)}
-            position={[0, 0, 0]}
-        >
-            <sphereGeometry args={[2, 32, 32]} />  
-            <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
-        </mesh>
-    );
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <sphereGeometry args={[2, 32, 32]} />
+      <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
 }
 
 function CameraControls() {
-    const { camera, gl } = useThree();
-    return <orbitControls args={[camera, gl.domElement]} />;
+  const { camera, gl } = useThree();
+  return <orbitControls args={[camera, gl.domElement]} />;
 }
 
 const RestaurantPreview = () => {
-    const {handleSelect, selectedFigure} = useSelectFigure()
-useEffect(()=> {
+  const { handleSelect, selectedFigure } = useSelectFigure()
+  useEffect(() => {
 
     handleSelect("kfk")
-}, [])
-    return (
-        <div style={{ height: '100vh', width: "100%" }}>
+  }, [])
+  return (
+    <div style={{ height: '100vh', width: "100%" }}>
 
-            <div className="left__panel">
-                <div className="left__panel__content">
-                    <div className="left__panel__header">
-                        <h1 className="left__panel__header__title">
-                            Chat
-                        </h1>
-                        <div className="left__panel__header__input__wrapper">
-                            <input type="search" className="left__panel__header__input" placeholder="Найти" />
-                            <img src={Search} alt="search" className="left__panel__header__input__img" />
-                        </div>
-                    </div>
-
-
-
-                    <div className="left__panel__elements">
-                        <div className="left__panel__element">
-                            <img src={Rect} alt="figure" className="left__panel__element__figure" />
-                            <p className="left__panel__element__text" onClick={()=>handleSelect("Куб")}  >
-                                Куб
-                            </p>
-                        </div>
-
-
-                        <div className="left__panel__element">
-                            <img src={Ellipse} alt="figure" className="left__panel__element__figure" />
-                            <p className="left__panel__element__text" onClick={()=>handleSelect("Шар")} >
-                                Шар
-                            </p>
-                        </div>
+      <div className="left__panel">
+        <div className="left__panel__content">
+          <div className="left__panel__header">
+            <h1 className="left__panel__header__title">
+              Chat
+            </h1>
+            <div className="left__panel__header__input__wrapper">
+              <input type="search" className="left__panel__header__input" placeholder="Найти" />
+              <img src={Search} alt="search" className="left__panel__header__input__img" />
+            </div>
+          </div>
 
 
 
-                        <div className="left__panel__element">
-                            <img src={Polygon} alt="figure" className="left__panel__element__figure" />
-                            <p className="left__panel__element__text" onClick={()=>handleSelect("Пирамида")} >
-                                Пирамида
-                            </p>
-                        </div>
-
-
-                        {/*
-
-                    <div className="left__panel__element">
-                        <img src={Plus} alt="figure" className="left__panel__element__figure" />
-                        <p className="left__panel__element__text">
-                         Новая фигура
-
-                        </p>
- 
-                    </div>
-    */}
-
-                        <div className="left__panel__element">
-                            <img src={Plus} alt="figure" className="left__panel__element__figure" />
-                            <p className="left__panel__element__text" onClick={() => document.getElementById('fileInput').click()}>
-                                Новая фигура
-                            </p>
-                            <input type="file" id="fileInput" style={{ display: 'none' }} />
-                        </div>
-
-
-                    </div>
-                </div>
+          <div className="left__panel__elements">
+            <div className="left__panel__element">
+              <img src={Rect} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Куб")}  >
+                Куб
+              </p>
             </div>
 
-            <Canvas style={{ background: 'black' }}>
 
-                <ambientLight />
-                <pointLight position={[10, 10, 10]} />
-{selectedFigure=="Куб" ? (
-<Cube />
-) : (
-
-    <>
-    </>
-)}
+            <div className="left__panel__element">
+              <img src={Ellipse} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Шар")} >
+                Шар
+              </p>
+            </div>
 
 
-{selectedFigure=="Пирамида" ? (
-<Pyramid />
-) : (
-    <>
-    
-    </>
-)}
-           {selectedFigure=="Шар" ? (
-               <Box />
- 
-) : (
-    <>
-                
-    
-    </>
-)}
-    
-                
-                <CameraControls />
-            </Canvas>
 
-            <Chat />
+            <div className="left__panel__element">
+              <img src={Polygon} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Пирамида")} >
+                Пирамида
+              </p>
+            </div>
+
+
+
+            <div className="left__panel__element">
+              <img src={Plus} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => document.getElementById('fileInput').click()}>
+                Новая фигура
+              </p>
+              <input type="file" id="fileInput" style={{ display: 'none' }} />
+            </div>
+
+
+          </div>
         </div>
-    );
+      </div>
+
+      <Canvas style={{ background: 'black' }}>
+
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        {selectedFigure == "Куб" ? (
+          <Cube />
+        ) : (
+
+          <>
+          </>
+        )}
+
+
+        {selectedFigure == "Пирамида" ? (
+          <Pyramid />
+        ) : (
+          <>
+
+          </>
+        )}
+        {selectedFigure == "Шар" ? (
+          <Box />
+
+        ) : (
+          <>
+
+
+          </>
+        )}
+
+
+        <CameraControls />
+      </Canvas>
+
+      <Chat />
+    </div>
+  );
 }
 
 export default RestaurantPreview;
