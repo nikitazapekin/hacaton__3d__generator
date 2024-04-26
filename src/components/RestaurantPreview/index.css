@@ -1,0 +1,86 @@
+.anim__container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.left__panel {
+  position: absolute;
+  z-index: 1111111111111111;
+  /* display: grid;*/
+  width: 297px;
+  height: 100%;
+  /*  grid-template-columns: minmax(0, 300px); */
+  /*  background-color: red; */
+
+  /* background-color: linear-gradient(90deg); */
+
+  background: linear-gradient(180deg, #f2d6d6 0%, #acbce5 100%);
+}
+
+
+.left__panel__header__title {
+
+  font-weight: 700;
+  font-size: 64px;
+  text-align: center;
+  color: #000;
+
+}
+
+.left__panel__header__input {
+  width: 224px;
+  height: 42px;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding-left: 16px;
+
+}
+
+
+.left__panel__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.left__panel__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left__panel__header__input__wrapper {
+  position: relative;
+}
+
+.left__panel__header__input__img {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 11px;
+}
+
+.left__panel__elements {
+  display: flex;
+  margin-top: 67px;
+  flex-direction: column;
+   
+
+}
+
+.left__panel__element {
+  display: flex;
+  width: 100%;
+  align-items: center;
+ cursor: pointer;
+  column-gap: 14px;
+}
+
+.left__panel__element__figure {
+  width: 27px;
+  height: 27px;
+  margin-left: 41px;
+}
