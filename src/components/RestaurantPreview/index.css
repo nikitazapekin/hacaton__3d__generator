@@ -77,10 +77,17 @@
   align-items: center;
  cursor: pointer;
   column-gap: 14px;
+ 
 }
 
 .left__panel__element__figure {
   width: 27px;
   height: 27px;
   margin-left: 41px;
+}
+
+.select__file {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
