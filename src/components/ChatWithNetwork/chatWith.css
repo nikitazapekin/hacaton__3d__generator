@@ -1,0 +1,76 @@
+.chat__with {
+    /*  width: calc(100%-297px); */
+
+    background-color: #fff;
+    /*    height: calc(100%-265px); */
+    overflow-y: scroll;
+    width: 80.8%;
+    height: 62%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 11111111111111;
+    display: flex;
+  align-items: center;
+    flex-direction: column;
+
+}
+
+
+.message {
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    row-gap: 63px;
+    flex-direction: column;
+
+}
+
+.your__message {
+    display: flex;
+    font-weight: 300;
+    row-gap: 10px;
+    font-size: 24px;
+    color: #000;
+}
+
+.your__message__content {
+    height: 93px;
+    width: 983px;
+    display: flex;
+    background-color: #EEEEEE;
+    align-items: center;
+    border-radius: 20px;
+    border: 3px solid black
+}
+
+.neural__logo,
+.your__logo {
+    width: 46px;
+    height: 46px;
+}
+
+.your__text {
+    padding-left: 40px;
+}
+
+.neural__message {
+    display: flex;
+}
+
+.message__content {
+    height: auto;
+    width: 983px;
+    display: flex;
+    background-color: #EEEEEE;
+    align-items: center;
+    border-radius: 20px;
+    border: 3px solid black;
+    padding: 40px;
+}
+
+.close__chat {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

@@ -91,3 +91,14 @@
   height: 100%;
   position: absolute;
 }
+
+
+.open__chat {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  top: 0;
+  color: #fff;
+  z-index: 1111;
+padding-right: 20px;
+} 

@@ -740,22 +740,24 @@ import JSZip from 'jszip';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useLoader } from '@react-three/fiber';
-import {Vase} from '../../models/Vase';
+import { Vase } from '../../models/Vase';
 import { Bird } from '../../models/Bird';
 import { SittingMan } from '../../models/SittingMan';
 import { Maus } from '../../models/Maus';
 import { Man } from '../../models/Man';
-
-
+import { Link } from 'react-router-dom';
+import ChatWithNetwotk from '../ChatWithNetwork/ChatWith';
+import useGenerate from '../../hooks/useGenerate';
+import axios from 'axios';
 extend({ OrbitControls });
 
 
 
- 
- 
 
 
- 
+
+
+
 
 
 function Cube() {
@@ -827,9 +829,9 @@ function Box() {
 
 
 
-  
-  
-  
+
+
+
   return (
     <mesh
       ref={meshRef}
@@ -846,26 +848,240 @@ function Box() {
 
 
 
- 
+
 function CameraControls() {
 
 
   //npx gltfjsx scene.gltf
-  
+
   const { camera, gl } = useThree();
   return <orbitControls args={[camera, gl.domElement]} />;
 }
+
+
+
+
+
+
+
+
+
+/*
+const g = () => {
+  const [imges, setImges] = useState([]);
+
+  const handleAdd = (obj) => {
+      setImges(prevImges => [...prevImges, obj]);
+  };
+
+  useEffect(() => {
+      localStorage.setItem("msg", JSON.stringify(imges));
+  }, [imges]);
+
+  return { imges, setImges, handleAdd };
+}; */
+
+
+
+function convertBase64ToImage(base64String) {
+  return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => {
+          resolve(image);
+      };
+      image.onerror = (error) => {
+          reject(error);
+      };
+      image.src = base64String;
+  });
+}
+
+
+
 const RestaurantPreview = () => {
   const { handleSelect, selectedFigure } = useSelectFigure()
   const [fileUrl, setFileUrl] = useState()
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
- 
-setFileUrl(file);
-  //  setFileUrl(URL.createObjectURL(file));
+
+    setFileUrl(file);
+
     console.log("changed")
   };
- 
+//const {imges} = useGenerate()
+
+
+
+
+
+
+const [isOpen, setIsOpen] = useState(false);
+
+const handleOpen = () => {
+  setIsOpen(prev=>!prev)
+}
+
+const [typedPrompt, setTypedPrompt] = useState("")
+
+const [url, setUrl] = useState()
+const handleInput =(value) => {
+    console.log(value)
+setTypedPrompt(value)
+
+}
+
+
+
+
+
+
+//const {handleAdd, imges} =useGenerate()
+const [imges, setImges] = useState([]);
+
+const handleAdd = (obj) => {
+    setImges(prevImges => [...prevImges, obj]);
+};
+
+
+
+    //const [typedPrompt, setTypedPrompt] = useState("")
+
+  //  const [url, setUrl] = useState()
+  /*  const handleInput =(value) => {
+        console.log(value)
+setTypedPrompt(value)
+
+    } */
+const handleClick = () => {
+console.log("work")
+    const url = 'http://127.0.0.1:7860/sdapi/v1/txt2img';
+
+const params = {
+    "prompt": typedPrompt,
+
+    "negative_prompt": "",
+  
+    "seed": -1,
+    "subseed": -1,
+    "subseed_strength": 0,
+    "seed_resize_from_h": -1,
+    "seed_resize_from_w": -1,
+  
+   
+    "batch_size": 1,
+    "n_iter": 1,
+    "steps": 5,
+    "cfg_scale": 7,
+    "width": 128,
+    "height": 128,
+    "restore_faces": true,
+    "tiling": true,
+    "do_not_save_samples": false,
+    "do_not_save_grid": false,
+    "eta": 0,
+    "denoising_strength": 0,
+    "s_min_uncond": 0,
+    "s_churn": 0,
+    "s_tmax": 0,
+    "s_tmin": 0,
+    "s_noise": 0,
+    "override_settings": {},
+    "override_settings_restore_afterwards": true,
+   
+    "refiner_switch_at": 0,
+    "disable_extra_networks": false,
+   
+    "comments": {},
+    "enable_hr": false,
+    "firstphase_width": 0,
+    "firstphase_height": 0,
+    "hr_scale": 2,
+   
+    "hr_second_pass_steps": 0,
+    "hr_resize_x": 0,
+    "hr_resize_y": 0,
+   
+    "hr_prompt": "",
+    "hr_negative_prompt": "",
+   
+  
+  
+    "script_args": [],
+    "send_images": true,
+    "save_images": false,
+    "alwayson_scripts": {}
+   
+    
+};
+axios.post(url, params)  
+.then(response => {
+    console.log('Ответ сервера:', response.data);
+    console.log("resp", response.data.images[0])
+    const base64String = response.data.images[0]
+    console.log(base64String)
+    const img = new Image();
+img.src = 'data:image/png;base64,' + base64String;
+img.onload = function() {
+  //document.body.appendChild(img);
+//document.querySelector(".mes_img").src= 'data:image/png;base64,' + base64String;
+  setUrl(img)
+  const obj = {
+   // url: img,
+   url: 'data:image/png;base64,' + base64String,
+    id: imges.length,
+    prompt: typedPrompt
+  }
+  handleAdd(obj)
+};
+})
+.catch(error => {
+    console.error('Ошибка запроса:', error);
+});
+}
+
+
+useEffect(() => {
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleClick();
+        }
+    };
+
+    window.addEventListener('keypress', handleKeyPress);
+
+    return () => {
+        window.removeEventListener('keypress', handleKeyPress);
+    };
+}, [handleClick])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+useEffect(()=> {
+  console.log("IMMM" +JSON.stringify(imges))
+}, [imges])
+
+
+
+const [outlook, setOutlook] = useState({
+  color:"",
+  textture: ""
+})
+
+
   return (
     <div style={{ height: '100vh', width: "100%" }}>
       <div className="left__panel">
@@ -900,11 +1116,35 @@ setFileUrl(file);
               </p>
             </div>
 
+
+
+            <div className="left__panel__element">
+              <img src={Polygon} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Maus")} >
+                Maus
+              </p>
+            </div>
+
+
+
+            <div className="left__panel__element">
+              <img src={Polygon} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Человек")} >
+                Человек
+              </p>
+            </div>
+
+
+
+
             <div className="left__panel__element">
               <img src={Plus} alt="figure" className="left__panel__element__figure" />
-              <p className="left__panel__element__text" onClick={() => document.getElementById('fileInput').click()}>
-                Новая фигура
-              </p>
+              <Link style={{ textDecoration: "none", color: "#000" }} to="http://localhost:5000/">
+                <p className="left__panel__element__text"
+                >
+                  Новая фигура
+                </p>
+              </Link>
               <input type="file" id="fileInput" style={{ display: 'none' }} onChange={(event) => handleFileChange(event)} />
             </div>
 
@@ -918,7 +1158,7 @@ setFileUrl(file);
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         {selectedFigure == "Куб" ? (
-          <Cube />
+          <Cube  />
         ) : (
 
           <>
@@ -942,23 +1182,83 @@ setFileUrl(file);
 
           </>
         )}
-{/*
-<Bird />
-<Vase />
-*/}
-<Maus />
-<SittingMan />
-<Man />
+ 
+
+
+{selectedFigure == "Maus" ? (
+          <Maus />
+
+        ) : (
+          <>
+
+
+          </>
+        )}
+
+
+
+{selectedFigure == "Человек" ? (
+    <Man />
+
+        ) : (
+          <>
+
+
+          </>
+        )}
         <CameraControls />
       </Canvas>
+<h1 className="open__chat" onClick={handleOpen}>
+  Chat
+</h1>
+      {isOpen ? (
 
-      <Chat />
+        <ChatWithNetwotk  imges={imges}  handleOpen={handleOpen} />
+      ) : (
+        <>
+        </>
+      )}
+      <Chat  handleClick={handleClick} handleInput={handleInput} />
+
+
+    
+
+      {imges.map((item)=> {
+        <div>
+          11
+<img src={item.url} />
+          </div>
+      })}
     </div>
   );
 }
 
 export default RestaurantPreview;
 
+
+
+/*
+
+
+  const {imges} = useGenerate()
+    return ( 
+
+
+        <div className="chat__with">
+
+            <div onClick={()=> console.log("IM" +JSON.stringify(imges))}>
+                dssdd
+            </div>
+{imges.map(item=> (
+    <div className="message">
+<img src={item.url} alt="textire" />
+        </div>
+))}
+        </div>
+
+
+
+        */
 //GLB
 
 

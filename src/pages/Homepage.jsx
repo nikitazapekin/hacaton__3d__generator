@@ -90,7 +90,7 @@ axios.post(url, params)
     const img = new Image();
 img.src = 'data:image/png;base64,' + base64String;
 img.onload = function() {
-  document.body.appendChild(img);
+ // document.body.appendChild(img);
 };
 })
 .catch(error => {

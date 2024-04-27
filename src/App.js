@@ -33,8 +33,9 @@ const publicRoutes = [
             {publicRoutes.map(({ path, Component }) => (<Route key={path} path={path} element={<Component  />} />)
             )}
 
-
+{/*
             <Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} />
+          */}
 
          </Routes>
       </BrowserRouter>
