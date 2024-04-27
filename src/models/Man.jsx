@@ -96,13 +96,17 @@ useGLTF.preload("/business_man_standing.glb");
 
 
 
-
+/*
 import React, { useRef } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import { Color, MeshBasicMaterial } from "three";  
 import ManScene from "../assets/3d/business_man_standing.glb";
 
 export function Man(props) {
+
+  const {outlook} = props
+
+  console.log("OUTTT"+JSON.stringify(outlook))
   const { nodes, materials } = useGLTF(ManScene);
 
  
@@ -132,5 +136,56 @@ export function Man(props) {
 }
 
 useGLTF.preload("/business_man_standing.glb");
+*/
 
+
+
+
+
+
+
+
+import React, { useRef, useEffect, useMemo } from "react";
+import { useGLTF, useTexture } from "@react-three/drei";
+import { MeshBasicMaterial } from "three";  
+import ManScene from "../assets/3d/business_man_standing.glb";
+
+export function Man({ outlook }) {
+  const { nodes, materials } = useGLTF(ManScene);
+  const texture = useTexture(outlook.texture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTEOajyiyvLQuaogfSh4C1_1tZDXEE83OMfg&s");
+  const newMaterial = useRef();
+
+  useEffect(() => {
+    if (!newMaterial.current) {
+      newMaterial.current = new MeshBasicMaterial({ map: texture });
+    } else {
+      newMaterial.current.map = texture;
+    }
+  }, [texture]);
+
+  const materialKey = useMemo(() => {
+    return outlook.texture ? `${outlook.texture}_${texture.uuid}` : null;
+  }, [outlook.texture, texture.uuid]);
+
+  if (materialKey) {
+    materials.M_455555566666666_Material__2 = newMaterial.current;
+  }
+
+  return (
+    <group dispose={null}>
+      <mesh
+        rotation={[0, 0, 0]}
+        castShadow
+        receiveShadow
+        geometry={nodes.Mesh1_M_455555566666666_Material__2_0.geometry}
+        material={materials.M_455555566666666_Material__2}
+        position={[0, 0, 0]}
+        scale={1.5}
+      />
+      <primitive object={nodes} />
+    </group>
+  );
+}
+
+useGLTF.preload("/business_man_standing.glb");
 

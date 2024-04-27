@@ -261,7 +261,7 @@ function Cube({ outlook }) {
   );
 }
 
-
+/*
 function Pyramid() {
   const meshRef = useRef();
   const [isHovered, setIsHovered] = useState(false);
@@ -286,10 +286,51 @@ function Pyramid() {
   );
 }
 
+*/
+
+
+function Pyramid({outlook}) {
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+  const [texture, setTexture] = useState(null);
+  const [textureKey, setTextureKey] = useState(0);
+
+  useEffect(() => {
+    const loader = new TextureLoader();
+    loader.load(
+      outlook.texture,
+      loadedTexture => {
+        setTexture(loadedTexture);
+        setTextureKey(prevKey => prevKey + 1);
+      }
+    );
+  }, []);
+
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <coneGeometry args={[2, 4, 4]} />
+      <meshStandardMaterial key={textureKey} map={texture} color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
+}
+ 
 
 
 
-function Box() {
+/*
+function Box({outlook}) {
   const meshRef = useRef();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -319,6 +360,48 @@ function Box() {
   );
 }
 
+
+*/
+
+
+
+function Box({ outlook }) {
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+  const [texture, setTexture] = useState(null);
+  const [textureKey, setTextureKey] = useState(0);
+
+  useEffect(() => {
+    if (outlook.texture) {
+      const loader = new TextureLoader();
+      loader.load(outlook.texture, loadedTexture => {
+        setTexture(loadedTexture);
+        setTextureKey(prevKey => prevKey + 1);
+      });
+    } else {
+      setTexture(null);
+    }
+  }, [outlook.texture]);
+
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <sphereGeometry args={[2, 32, 32]} />
+      <meshStandardMaterial key={textureKey} map={texture} color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
+}
 
 
 
@@ -388,12 +471,6 @@ const RestaurantPreview = () => {
 
   }
 
-
-
-
-
-
-  //const {handleAdd, imges} =useGenerate()
   const [imges, setImges] = useState([]);
 
   const handleAdd = (obj) => {
@@ -646,14 +723,14 @@ const handleClick = () => {
 
 
         {selectedFigure == "Пирамида" ? (
-          <Pyramid />
+          <Pyramid outlook={outlook} />
         ) : (
           <>
 
           </>
         )}
         {selectedFigure == "Шар" ? (
-          <Box />
+          <Box outlook={outlook} />
 
         ) : (
           <>
@@ -677,7 +754,7 @@ const handleClick = () => {
 
 
         {selectedFigure == "Человек" ? (
-          <Man />
+          <Man outlook={outlook} />
 
         ) : (
           <>

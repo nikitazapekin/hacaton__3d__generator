@@ -10,6 +10,8 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import MausScene from "../assets/3d/maus_tank.glb"
 export function Maus(props) {
+
+  
   const { nodes, materials } = useGLTF(MausScene)
   return (
     <group {...props} dispose={null}>
