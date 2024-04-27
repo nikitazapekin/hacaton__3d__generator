@@ -38,7 +38,7 @@ import { useEffect } from "react";
 import useGenerate from "../../hooks/useGenerate";
 import "./chatWith.css";
 import Logo from "../../assets/images/иконка.png"
-const ChatWithNetwotk = ({ imges, handleOpen }) => {
+const ChatWithNetwotk = ({ imges, handleOpen, setTexture }) => {
 
     useEffect(() => {
         console.log(JSON.stringify("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" + JSON.stringify(imges)))
@@ -102,7 +102,7 @@ const ChatWithNetwotk = ({ imges, handleOpen }) => {
                             Сделано!  
                             </p>
 
-                            <img src={item.url} alt="texture" className="message__image" />
+                            <img src={item.url} alt="texture" className="message__image" onClick={()=>setTexture(item.url)}/>
                         </div>
                     </div>
                 </div>

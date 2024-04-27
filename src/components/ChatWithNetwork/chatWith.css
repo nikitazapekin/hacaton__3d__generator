@@ -32,6 +32,7 @@
     row-gap: 10px;
     font-size: 24px;
     color: #000;
+    column-gap: 20px;
 }
 
 .your__message__content {
@@ -56,6 +57,7 @@
 
 .neural__message {
     display: flex;
+    column-gap: 20px;
 }
 
 .message__content {
@@ -73,4 +75,7 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+.message__image {
+    margin-left: 20px;
 }
