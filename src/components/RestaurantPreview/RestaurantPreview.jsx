@@ -39,6 +39,7 @@ import ChatWithNetwotk from '../ChatWithNetwork/ChatWith';
 import useGenerate from '../../hooks/useGenerate';
 import axios from 'axios';
 import Modal from '../Modal/Modal';
+import { Mauss } from '../../models/Mauss';
 extend({ OrbitControls });
 
 
@@ -289,7 +290,7 @@ function Pyramid() {
 */
 
 
-function Pyramid({outlook}) {
+function Pyramid({ outlook }) {
   const meshRef = useRef();
   const [isHovered, setIsHovered] = useState(false);
   const [texture, setTexture] = useState(null);
@@ -325,7 +326,7 @@ function Pyramid({outlook}) {
     </mesh>
   );
 }
- 
+
 
 
 
@@ -476,16 +477,16 @@ const RestaurantPreview = () => {
   const handleAdd = (obj) => {
     setImges(prevImges => [...prevImges, obj]);
   };
-  
-  
-  
- 
-const [settings, setSettings] = useState({
-  width: 0,
-  height: 0,
-  steps: 0
-})
-const handleClick = () => {
+
+
+
+
+  const [settings, setSettings] = useState({
+    width: 0,
+    height: 0,
+    steps: 0
+  })
+  const handleClick = () => {
     console.log("work")
     const url = 'http://127.0.0.1:7860/sdapi/v1/txt2img';
 
@@ -504,9 +505,9 @@ const handleClick = () => {
 
       "batch_size": 1,
       "n_iter": 1,
-      
+
       "cfg_scale": 7,
-     "steps": settings.steps,
+      "steps": settings.steps,
       "width": settings.width,
       "height": settings.height,
       "restore_faces": true,
@@ -535,7 +536,7 @@ const handleClick = () => {
       "hr_second_pass_steps": 0,
       "hr_resize_x": 0,
       "hr_resize_y": 0,
-      
+
       "hr_prompt": "",
       "hr_negative_prompt": "",
 
@@ -635,7 +636,7 @@ const handleClick = () => {
   }
 
 
-  useEffect(()=> {
+  useEffect(() => {
     console.log(settings)
   }, [settings])
   return (
@@ -669,6 +670,15 @@ const handleClick = () => {
               <img src={Polygon} alt="figure" className="left__panel__element__figure" />
               <p className="left__panel__element__text" onClick={() => handleSelect("Пирамида")} >
                 Пирамида
+              </p>
+            </div>
+
+
+
+            <div className="left__panel__element">
+              <img src={Polygon} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Гусеницы")} >
+                Гусеницы
               </p>
             </div>
 
@@ -741,7 +751,9 @@ const handleClick = () => {
 
 
 
-        {selectedFigure == "Maus" ? (
+
+
+        {selectedFigure == "Гусеницы" ? (
           <Maus outlook={outlook} />
 
         ) : (
@@ -750,6 +762,21 @@ const handleClick = () => {
 
           </>
         )}
+        {/*
+
+<Mauss outlook={outlook} />
+*/}
+
+        {selectedFigure == "Maus" ? (
+          <Mauss outlook={outlook} />
+
+        ) : (
+          <>
+
+
+          </>
+        )}
+
 
 
 
@@ -792,7 +819,11 @@ const handleClick = () => {
         </div>
       })}
 
-{/*
+
+      {/*
+    */}
+
+      {/*
 
       <button onClick={() => setTexture("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnaEHoW5QWjxpD2klNN6aeq8eKyMjLc-Dhxg&s")}>
       set
