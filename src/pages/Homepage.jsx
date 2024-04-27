@@ -84,56 +84,22 @@ const params = {
 axios.post(url, params)  
 .then(response => {
     console.log('Ответ сервера:', response.data);
-
     console.log("resp", response.data.images[0])
-
-
-
-
-
-
     const base64String = response.data.images[0]
     console.log(base64String)
-
-
-
     const img = new Image();
-
-// Устанавливаем источник изображения как data URI с помощью строки Base64
 img.src = 'data:image/png;base64,' + base64String;
-
-// Добавляем обработчик события, который будет выполнен после загрузки изображения
 img.onload = function() {
-  // Вставляем изображение на страницу
   document.body.appendChild(img);
 };
-/*
-convertBase64ToImage(base64String)
-    .then((image) => {
-        console.log("Изображение успешно загружено:", image);
-        // Действия с объектом изображения, например, добавление его в DOM:
-        document.body.appendChild(image);
-    })
-    .catch((error) => {
-        console.error("Ошибка при загрузке изображения:", error);
-    });
-  */
-
-
-
 })
 .catch(error => {
     console.error('Ошибка запроса:', error);
 });
 }
-
-
     return ( 
         <>
-        
         Homepage
-        
-
         <Link to={`/3D`}>
             3D
         </Link>

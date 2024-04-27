@@ -381,25 +381,7 @@ export default RestaurantPreview;
  
 */
 
-
-
-
-import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-//import "./index.scss"
-
-import Search from "../../assets/images/Group 1.png"
-import "./index.css"
-import Rect from "../../assets/images/Rectangle 4.png"
-import Ellipse from "../../assets/images/Ellipse 2.png"
-import Polygon from "../../assets/images/Polygon 1.png"
-import Plus from "../../assets/images/+.png"
-import Chat from '../Chat';
-import useSelectFigure from '../../hooks';
-extend({ OrbitControls });
-
-
+/*
 function Cube() {
   const meshRef = useRef();
 
@@ -425,7 +407,142 @@ function Cube() {
   );
 }
 
+*/
 
+/*
+
+function Cube() {
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  const textureUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKBMglABe03_aY-m4umgPieAOtHvJS4kqAfg&s'; 
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <boxGeometry args={[4, 4, 4]} />
+      <meshStandardMaterial map={ new TextureLoader().load(textureUrl)  } color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
+}
+*/
+
+
+
+
+
+
+
+
+
+/*
+
+import React, { useEffect, useRef, useState } from 'react';
+import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+//import "./index.scss"
+
+import Search from "../../assets/images/Group 1.png"
+import "./index.css"
+import Rect from "../../assets/images/Rectangle 4.png"
+import Ellipse from "../../assets/images/Ellipse 2.png"
+import Polygon from "../../assets/images/Polygon 1.png"
+import Plus from "../../assets/images/+.png"
+import Chat from '../Chat';
+import useSelectFigure from '../../hooks';
+import { TextureLoader } from 'three';
+
+import JSZip from 'jszip';
+
+
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { useLoader } from '@react-three/fiber';
+
+
+extend({ OrbitControls });
+
+
+
+ 
+
+async function extractGltfFromZip(zipFile) {
+  const zip = new JSZip();
+  const zipData = await zip.loadAsync(zipFile);
+
+  console.log("ZIP" +JSON.stringify(zipData))
+ // const gltfFile = zipData.files['path/to/your/model.gltf']; // Путь к файлу .gltf внутри архива
+ const gltfFile = zipData.files['scene.gltf']
+  if (gltfFile) {
+    const gltfData = await gltfFile.async('string');
+    const gltfUrl = URL.createObjectURL(new Blob([gltfData]));
+    return gltfUrl;
+  } else {
+    throw new Error('GLTF file not found in the zip archive');
+  }
+}
+
+
+
+function Model({ fileUrl }) {
+  const gltf = useLoader(GLTFLoader, fileUrl);
+  const group = useRef();
+
+  // Перемещение, вращение, масштабирование модели по вашему усмотрению
+  // Например:
+  // group.current.position.set(x, y, z);
+  // group.current.rotation.set(rx, ry, rz);
+  // group.current.scale.set(sx, sy, sz);
+
+  return (
+    <group ref={group}>
+      <primitive object={gltf.scene} />
+    </group>
+  );
+}
+
+
+
+
+function Cube() {
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  const textureUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKBMglABe03_aY-m4umgPieAOtHvJS4kqAfg&s';
+  let materialProps = { color: isHovered ? 'red' : 'orange' };
+  if (textureUrl.trim() !== '') {
+    materialProps.map = new TextureLoader().load(textureUrl);
+  }
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <boxGeometry args={[4, 4, 4]} />
+      <meshStandardMaterial {...materialProps} />
+    </mesh>
+  );
+}
 
 
 function Pyramid() {
@@ -452,61 +569,6 @@ function Pyramid() {
   );
 }
 
-/*
-function Box() {
-    const meshRef = useRef();
-
-  const [isHovered, setIsHovered] = useState(false);
-  
-    useFrame(() => {
-        if (!isHovered) {
-            meshRef.current.rotation.x += 0.01;
-            meshRef.current.rotation.y += 0.01;
-        }
-    });
-
-    return (
-        <mesh
-            ref={meshRef}
-            onPointerOver={() => setIsHovered(true)}
-            onPointerOut={() => setIsHovered(false)}
-            position={[0, 0, 0]}
-        >
-            <boxGeometry args={[4, 4, 4]} />
-            <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
-        </mesh>
-    );
-}
- */
-/*
-
-function Box() {
-    const meshRef = useRef();
-    const [isHovered, setIsHovered] = useState(false);
-    
-    useFrame(() => {
-        if (!isHovered) {
-            meshRef.current.rotation.x += 0.01;
-            meshRef.current.rotation.y += 0.01;
-        }
-    });
-
-    return (
-        <mesh
-            ref={meshRef}
-            onPointerOver={() => setIsHovered(true)}
-            onPointerOut={() => setIsHovered(false)}
-            position={[0, 0, 0]}
-        >
-            <coneGeometry args={[2, 4, 4]} />  
-            <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
-        </mesh>
-    );
-}
-
-*/
-
-
 function Box() {
   const meshRef = useRef();
   const [isHovered, setIsHovered] = useState(false);
@@ -518,6 +580,12 @@ function Box() {
     }
   });
 
+
+
+
+  
+  
+  
   return (
     <mesh
       ref={meshRef}
@@ -530,21 +598,30 @@ function Box() {
     </mesh>
   );
 }
-
 function CameraControls() {
+
+
+  
+  
   const { camera, gl } = useThree();
   return <orbitControls args={[camera, gl.domElement]} />;
 }
-
 const RestaurantPreview = () => {
   const { handleSelect, selectedFigure } = useSelectFigure()
-  useEffect(() => {
+  const [fileUrl, setFileUrl] = useState()
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
 
-    handleSelect("kfk")
-  }, [])
+    const gltfUrl = await extractGltfFromZip(file);
+
+    console.log("GLTF" +gltfUrl)
+setFileUrl(gltfUrl);
+  //  setFileUrl(URL.createObjectURL(file));
+    console.log("changed")
+  };
+ 
   return (
     <div style={{ height: '100vh', width: "100%" }}>
-
       <div className="left__panel">
         <div className="left__panel__content">
           <div className="left__panel__header">
@@ -556,9 +633,6 @@ const RestaurantPreview = () => {
               <img src={Search} alt="search" className="left__panel__header__input__img" />
             </div>
           </div>
-
-
-
           <div className="left__panel__elements">
             <div className="left__panel__element">
               <img src={Rect} alt="figure" className="left__panel__element__figure" />
@@ -566,16 +640,12 @@ const RestaurantPreview = () => {
                 Куб
               </p>
             </div>
-
-
             <div className="left__panel__element">
               <img src={Ellipse} alt="figure" className="left__panel__element__figure" />
               <p className="left__panel__element__text" onClick={() => handleSelect("Шар")} >
                 Шар
               </p>
             </div>
-
-
 
             <div className="left__panel__element">
               <img src={Polygon} alt="figure" className="left__panel__element__figure" />
@@ -584,14 +654,12 @@ const RestaurantPreview = () => {
               </p>
             </div>
 
-
-
             <div className="left__panel__element">
               <img src={Plus} alt="figure" className="left__panel__element__figure" />
               <p className="left__panel__element__text" onClick={() => document.getElementById('fileInput').click()}>
                 Новая фигура
               </p>
-              <input type="file" id="fileInput" style={{ display: 'none' }} />
+              <input type="file" id="fileInput" style={{ display: 'none' }} onChange={(event) => handleFileChange(event)} />
             </div>
 
 
@@ -630,6 +698,257 @@ const RestaurantPreview = () => {
         )}
 
 
+{fileUrl && <Model fileUrl={fileUrl} />}
+        <CameraControls />
+      </Canvas>
+
+      <Chat />
+    </div>
+  );
+}
+
+export default RestaurantPreview;
+ */
+
+
+
+
+
+
+
+
+
+
+
+import React, { useEffect, useRef, useState } from 'react';
+import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+//import "./index.scss"
+
+import Search from "../../assets/images/Group 1.png"
+import "./index.css"
+import Rect from "../../assets/images/Rectangle 4.png"
+import Ellipse from "../../assets/images/Ellipse 2.png"
+import Polygon from "../../assets/images/Polygon 1.png"
+import Plus from "../../assets/images/+.png"
+import Chat from '../Chat';
+import useSelectFigure from '../../hooks';
+import { TextureLoader } from 'three';
+
+import JSZip from 'jszip';
+
+
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { useLoader } from '@react-three/fiber';
+import {Vase} from '../../models/Vase';
+import { Bird } from '../../models/Bird';
+import { SittingMan } from '../../models/SittingMan';
+import { Maus } from '../../models/Maus';
+import { Man } from '../../models/Man';
+
+
+extend({ OrbitControls });
+
+
+
+ 
+ 
+
+
+ 
+
+
+function Cube() {
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  const textureUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKBMglABe03_aY-m4umgPieAOtHvJS4kqAfg&s';
+  let materialProps = { color: isHovered ? 'red' : 'orange' };
+  if (textureUrl.trim() !== '') {
+    materialProps.map = new TextureLoader().load(textureUrl);
+  }
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <boxGeometry args={[4, 4, 4]} />
+      <meshStandardMaterial {...materialProps} />
+    </mesh>
+  );
+}
+
+
+function Pyramid() {
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <coneGeometry args={[2, 4, 4]} />
+      <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
+}
+
+function Box() {
+  const meshRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+
+  useFrame(() => {
+    if (!isHovered) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+
+
+
+
+  
+  
+  
+  return (
+    <mesh
+      ref={meshRef}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+      position={[0, 0, 0]}
+    >
+      <sphereGeometry args={[2, 32, 32]} />
+      <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
+    </mesh>
+  );
+}
+
+
+
+
+ 
+function CameraControls() {
+
+
+  //npx gltfjsx scene.gltf
+  
+  const { camera, gl } = useThree();
+  return <orbitControls args={[camera, gl.domElement]} />;
+}
+const RestaurantPreview = () => {
+  const { handleSelect, selectedFigure } = useSelectFigure()
+  const [fileUrl, setFileUrl] = useState()
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+ 
+setFileUrl(file);
+  //  setFileUrl(URL.createObjectURL(file));
+    console.log("changed")
+  };
+ 
+  return (
+    <div style={{ height: '100vh', width: "100%" }}>
+      <div className="left__panel">
+        <div className="left__panel__content">
+          <div className="left__panel__header">
+            <h1 className="left__panel__header__title">
+              Chat
+            </h1>
+            <div className="left__panel__header__input__wrapper">
+              <input type="search" className="left__panel__header__input" placeholder="Найти" />
+              <img src={Search} alt="search" className="left__panel__header__input__img" />
+            </div>
+          </div>
+          <div className="left__panel__elements">
+            <div className="left__panel__element">
+              <img src={Rect} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Куб")}  >
+                Куб
+              </p>
+            </div>
+            <div className="left__panel__element">
+              <img src={Ellipse} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Шар")} >
+                Шар
+              </p>
+            </div>
+
+            <div className="left__panel__element">
+              <img src={Polygon} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Пирамида")} >
+                Пирамида
+              </p>
+            </div>
+
+            <div className="left__panel__element">
+              <img src={Plus} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => document.getElementById('fileInput').click()}>
+                Новая фигура
+              </p>
+              <input type="file" id="fileInput" style={{ display: 'none' }} onChange={(event) => handleFileChange(event)} />
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <Canvas style={{ background: 'black' }}>
+
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        {selectedFigure == "Куб" ? (
+          <Cube />
+        ) : (
+
+          <>
+          </>
+        )}
+
+
+        {selectedFigure == "Пирамида" ? (
+          <Pyramid />
+        ) : (
+          <>
+
+          </>
+        )}
+        {selectedFigure == "Шар" ? (
+          <Box />
+
+        ) : (
+          <>
+
+
+          </>
+        )}
+{/*
+<Bird />
+<Vase />
+*/}
+<Maus />
+<SittingMan />
+<Man />
         <CameraControls />
       </Canvas>
 
@@ -640,9 +959,7 @@ const RestaurantPreview = () => {
 
 export default RestaurantPreview;
 
-
-
-
+//GLB
 
 
 //https://gltf.pmnd.rs/
