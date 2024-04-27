@@ -1,0 +1,13 @@
+.pics {
+  margin-top: 120px;
+height: auto;
+width: 100%;
+}
+.pics__content {
+    width: 100%;
+overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(200px, 373px)  minmax(200px, 373px) minmax(200px, 373px) minmax(200px, 373px);
+  column-gap: 10px;
+  justify-content: center;
+}

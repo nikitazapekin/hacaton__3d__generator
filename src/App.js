@@ -8,9 +8,12 @@ import ContentPage from './pages/3dpage';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import SelectFormPage from './pages/SelectFormPage';
 
 const HOMEPAGE_ROUTE = "/"
 const MODEL_ROUTE="/3D"
+
+const SELECT_ROUTE="/SelectFigure"
 const publicRoutes = [
   {
      path: HOMEPAGE_ROUTE,
@@ -19,6 +22,10 @@ const publicRoutes = [
   {
     path: MODEL_ROUTE,
     Component: ContentPage
+  },
+  {
+    path: SELECT_ROUTE,
+    Component: SelectFormPage
   }
   
 

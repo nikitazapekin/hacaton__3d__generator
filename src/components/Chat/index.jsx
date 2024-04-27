@@ -155,11 +155,8 @@ const Chat = ({ handleClick, handleInput, handleModal, setTexture }) => {
                         <input type="text" className="messagw" placeholder="Опишите желаемую текстуру для выбранной фигуры" onChange={(event) => handleInput(event.target.value)} />
                         <img src={Arrow} alt="arrow" className="message__icon" onClick={() => handleClick} />
                     </div>
-
                     <img src={Settings} alt="seet" className="settings" onClick={handleModal} />
                 </div>
-
-
 
                 <div className="chat__element">
                     <div className="chat__wrapepr">

@@ -1,7 +1,7 @@
 
 import "./index.css"
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Navigation = () => {
 
     const [isActive, setIsActive] = useState(1)
@@ -11,15 +11,21 @@ const Navigation = () => {
     }
     return (
         <div className="navigation">
+<Link to="/">
+            <b className="navigation__title">
+                Красивизатор
+                9000
+            </b>
+</Link>
             <div className="navigation__content">
-                <div  className={`${isActive==1 ? `active__header` : ``}  navigation__item`} onClick={()=>handleActive(1)}>
+                <div className={`navigation__item`} onClick={() => handleActive(1)}>
                     Главная
                 </div>
 
-                <div  className={`${isActive==2 ? `active__header` : ``}  navigation__item`} onClick={()=>handleActive(2)}>
+                <div className={`navigation__item`} onClick={() => handleActive(2)}>
                     История
                 </div>
-                <div  className={`${isActive==3 ? `active__header` : ``}  navigation__item`} onClick={()=>handleActive(3)}>
+                <div className={`navigation__item`} onClick={() => handleActive(3)}>
                     Аккаунт
                 </div>
             </div>
