@@ -5,8 +5,8 @@
     max-width: 80%;
     margin: 0 auto;
 
-display: flex;
-justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .select__content {
@@ -163,11 +163,68 @@ justify-content: space-between;
 }
 
 .active__fig {
-height: 100%;
-border-bottom: 3px solid black;
+    height: 100%;
+    border-bottom: 3px solid black;
 }
+
 .selected__btn:hover {
     background-color: rgb(133, 7, 7);
     letter-spacing: 0.7px;
     color: #fff;
+}
+
+.select__texture__element {
+    height: 663px;
+    width: 535px;
+
+    background: rgba(238, 238, 238, 0.4);
+    margin-top: auto;
+
+    font-weight: 300;
+    font-size: 30px;
+    color: #000;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border-radius: 40px;
+}
+
+.select__textures {
+    display: grid;
+    grid-template-columns: minmax(0, 195px) minmax(0, 195px);
+    gap: 38px;
+    justify-content: center;
+}
+
+.sel__text {
+    width: 206px;
+    height: 37px;
+    font-weight: 300;
+    font-size: 24px;
+    color: #000;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.25);
+    background: rgba(71, 90, 73, 0.2);
+    border-radius: 20px;
+   position: relative;
+   top: 23px;
+    cursor: pointer;
+    transition: 1s;
+    margin: 0 auto;
+    border: none;
+    outline: none;
+
+}
+
+
+
+.sel__text:hover {
+    background-color: rgb(133, 7, 7);
+    letter-spacing: 0.7px;
+    color: #fff;
+}
+
+.sel__texture {
+    cursor: pointer;
 }

@@ -143,8 +143,6 @@ useGLTF.preload("/business_man_standing.glb");
 
 
 
-
-
 import React, { useRef, useEffect, useMemo } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import { MeshBasicMaterial } from "three";  
@@ -189,3 +187,5 @@ export function Man({ outlook }) {
 
 useGLTF.preload("/business_man_standing.glb");
 
+
+ 

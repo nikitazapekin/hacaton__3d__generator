@@ -8,7 +8,11 @@ import axios from "axios"
 import { useState } from "react"
 
 
-
+import Picker from "../../assets/network/color-picker.png"
+import Chatt from "../../assets/network/chat (1).png"
+import File from "../../assets/network/folder.png"
+import Settt from "../../assets/network/settings.png"
+import Send from "../../assets/network/send (3).png"
 import { useEffect } from "react"
 import useGenerate from "../../hooks/useGenerate"
 function convertBase64ToImage(base64String) {
@@ -23,7 +27,7 @@ function convertBase64ToImage(base64String) {
         image.src = base64String;
     });
 }
-const Chat = ({ handleClick, handleInput, handleModal, setTexture }) => {
+const Chat = ({ handleClick, handleInput, handleModal, setTexture , handleOpen}) => {
 
 
 
@@ -145,12 +149,88 @@ const Chat = ({ handleClick, handleInput, handleModal, setTexture }) => {
     }, [handleClick])
      */
 
-
+    /*
+    
+    import Picker from "../../assets/network/color-picker.png"
+    import Chat from "../../assets/network/chat (1).png"
+    import File from "../../assets/network/folder.png"
+    
+    import Send from "../../assets/network/send (3).png"
+    
+    */
     return (
 
         <div className="chat">
+
+
+            <div className="chat__content">
+
+                <div className="chat__input__wrapper">
+
+                    <input type="text" className="chat__input" placeholder="Опишите текстуру" 
+                    onChange={(event) => handleInput(event.target.value)}
+                    />
+                    <img src={Send} alt="enter" className="chat__input__image" />
+                </div>
+
+                <div className="color__wrapper">
+                    <input type="color" className="chat__input__color" />
+                {/*    <img src={Picker} alt="enter" className="chat__picker__image" /> */}
+                </div>
+
+
+
+
+                <div className="chat__file">
+    <img 
+        src={File} 
+        alt="enter" 
+        className="chat__file__image"
+        onClick={() => {
+            document.querySelector('.fileInput').click();
+        }}
+    />
+    <input
+        className="fileInput"
+        type="file"
+        onChange={(e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const imageUrl = event.target.result;
+                setTexture(imageUrl);
+            };
+            reader.readAsDataURL(file);
+        }}
+        style={{ display: 'none' }}
+    />
+</div>
+
+{/*
+                <div className="chat__file">
+                <input
+                            className="messagw"
+                            type="file"
+                            onChange={(e) => {
+                                const file = e.target.files[0];
+                                const reader = new FileReader();
+                                reader.onload = (event) => {
+                                    const imageUrl = event.target.result;
+                                    setTexture(imageUrl);
+                                };
+                                reader.readAsDataURL(file);
+                            }}
+                        />
+                        
+                        <img src={File} alt="enter" className="chat__file__image" />
+                        </div>
+                        */}
+                <img src={Settings} alt="enter" className="chat__file__image" onClick={handleModal}  />
+                <img src={Chatt} alt="enter" className="chat__chat__image" onClick={handleOpen} />
+            </div>
+            {/*
             <div className="chat__elements">
-                <div className="chat__element">
+            <div className="chat__element">
                     <div className="chat__wrapepr">
                         <input type="text" className="messagw" placeholder="Опишите желаемую текстуру для выбранной фигуры" onChange={(event) => handleInput(event.target.value)} />
                         <img src={Arrow} alt="arrow" className="message__icon" onClick={() => handleClick} />
@@ -160,15 +240,12 @@ const Chat = ({ handleClick, handleInput, handleModal, setTexture }) => {
 
                 <div className="chat__element">
                     <div className="chat__wrapepr">
-                        {/*  <input type="text" className="messagw" /> */}
+                      
                         <input type="color" className="messagw" />
 
                         <img src={Arrow} alt="arrow" className="message__icon" />
                     </div>
-                    {/*
-                    <img src={Settings} alt="seet" className="settings" />
-    */}
-                    <p></p>
+             <p></p>
                 </div>
 
 
@@ -191,15 +268,14 @@ const Chat = ({ handleClick, handleInput, handleModal, setTexture }) => {
                             }}
                         />
 
-                        {/*
-                        <input   className="messagw" placeholder="Импортировать свою текстуру"   onClick={() => setTexture("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnaEHoW5QWjxpD2klNN6aeq8eKyMjLc-Dhxg&s")} />
-*/}
+                       
                         <img src={Download} alt="arrow" className="message__icon" />
                     </div>
 
                     <p></p>
                 </div>
-            </div>
+                </div>
+                        */}
         </div>
     );
 }

@@ -40,6 +40,7 @@ import useGenerate from '../../hooks/useGenerate';
 import axios from 'axios';
 import Modal from '../Modal/Modal';
 import { Mauss } from '../../models/Mauss';
+import { Tower } from '../../models/Tower';
 extend({ OrbitControls });
 
 
@@ -257,37 +258,14 @@ function Cube({ outlook }) {
       position={[0, 0, 0]}
     >
       <boxGeometry args={[4, 4, 4]} />
-      <meshStandardMaterial key={textureKey} map={texture} color={isHovered ? 'red' : 'orange'} />
+      <meshStandardMaterial key={textureKey} map={texture} //color={isHovered ? 'red' : 'orange'} 
+      color={'white'}
+      />
     </mesh>
   );
 }
 
-/*
-function Pyramid() {
-  const meshRef = useRef();
-  const [isHovered, setIsHovered] = useState(false);
 
-  useFrame(() => {
-    if (!isHovered) {
-      meshRef.current.rotation.x += 0.01;
-      meshRef.current.rotation.y += 0.01;
-    }
-  });
-
-  return (
-    <mesh
-      ref={meshRef}
-      onPointerOver={() => setIsHovered(true)}
-      onPointerOut={() => setIsHovered(false)}
-      position={[0, 0, 0]}
-    >
-      <coneGeometry args={[2, 4, 4]} />
-      <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
-    </mesh>
-  );
-}
-
-*/
 
 
 function Pyramid({ outlook }) {
@@ -322,47 +300,14 @@ function Pyramid({ outlook }) {
       position={[0, 0, 0]}
     >
       <coneGeometry args={[2, 4, 4]} />
-      <meshStandardMaterial key={textureKey} map={texture} color={isHovered ? 'red' : 'orange'} />
+      <meshStandardMaterial key={textureKey} map={texture} //color={isHovered ? 'red' : 'orange'} 
+      color={'white'}
+      />
     </mesh>
   );
 }
 
 
-
-
-/*
-function Box({outlook}) {
-  const meshRef = useRef();
-  const [isHovered, setIsHovered] = useState(false);
-
-  useFrame(() => {
-    if (!isHovered) {
-      meshRef.current.rotation.x += 0.01;
-      meshRef.current.rotation.y += 0.01;
-    }
-  });
-
-
-
-
-
-
-
-  return (
-    <mesh
-      ref={meshRef}
-      onPointerOver={() => setIsHovered(true)}
-      onPointerOut={() => setIsHovered(false)}
-      position={[0, 0, 0]}
-    >
-      <sphereGeometry args={[2, 32, 32]} />
-      <meshStandardMaterial color={isHovered ? 'red' : 'orange'} />
-    </mesh>
-  );
-}
-
-
-*/
 
 
 
@@ -399,7 +344,9 @@ function Box({ outlook }) {
       position={[0, 0, 0]}
     >
       <sphereGeometry args={[2, 32, 32]} />
-      <meshStandardMaterial key={textureKey} map={texture} color={isHovered ? 'red' : 'orange'} />
+      <meshStandardMaterial key={textureKey} map={texture} //color={isHovered ? 'red' : 'orange'}
+      color={'white'}
+      />
     </mesh>
   );
 }
@@ -479,7 +426,7 @@ const RestaurantPreview = () => {
   };
 
 
-
+const [isLoading, setIsLoading]  = useState(false)
 
   const [settings, setSettings] = useState({
     width: 0,
@@ -488,6 +435,7 @@ const RestaurantPreview = () => {
   })
   const handleClick = () => {
     console.log("work")
+    setIsLoading(true)
     const url = 'http://127.0.0.1:7860/sdapi/v1/txt2img';
 
     const params = {
@@ -569,9 +517,11 @@ const RestaurantPreview = () => {
             prompt: typedPrompt
           }
           handleAdd(obj)
+          setIsLoading(false)
         };
       })
       .catch(error => {
+        setIsLoading(false)
         console.error('Ошибка запроса:', error);
       });
   }
@@ -645,7 +595,8 @@ const RestaurantPreview = () => {
         <div className="left__panel__content">
           <div className="left__panel__header">
             <h1 className="left__panel__header__title">
-              Chat
+            Красивизатор
+9000
             </h1>
             <div className="left__panel__header__input__wrapper">
               <input type="search" className="left__panel__header__input" placeholder="Найти" />
@@ -682,12 +633,18 @@ const RestaurantPreview = () => {
               </p>
             </div>
 
+            <div className="left__panel__element">
+              <img src={Polygon} alt="figure" className="left__panel__element__figure" />
+              <p className="left__panel__element__text" onClick={() => handleSelect("Башня")} >
+              Башня
+              </p>
+            </div>
 
 
             <div className="left__panel__element">
               <img src={Polygon} alt="figure" className="left__panel__element__figure" />
               <p className="left__panel__element__text" onClick={() => handleSelect("Maus")} >
-                Maus
+               Танк
               </p>
             </div>
 
@@ -719,7 +676,10 @@ const RestaurantPreview = () => {
         </div>
       </div>
 
-      <Canvas style={{ background: 'black' }}>
+      <Canvas
+      // style={{ background: 'black' }}
+      style={{background: "white"}}
+      >
 
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
@@ -789,19 +749,38 @@ const RestaurantPreview = () => {
 
           </>
         )}
+
+
+
+{selectedFigure == "Башня" ? (
+<Tower outlook={outlook} />
+          
+
+        ) : (
+          <>
+
+
+          </>
+        )}
+
+{/*
+      */}
         <CameraControls />
       </Canvas>
+
+      {/*
       <h1 className="open__chat" onClick={handleOpen}>
-        Chat
+      Chat
       </h1>
+      */}
       {isOpen ? (
 
-        <ChatWithNetwotk imges={imges} handleOpen={handleOpen} setTexture={setTexture} />
+        <ChatWithNetwotk imges={imges} handleOpen={handleOpen} setTexture={setTexture} isLoading={isLoading} />
       ) : (
         <>
         </>
       )}
-      <Chat handleClick={handleClick} handleInput={handleInput} handleModal={handleModal} setTexture={setTexture} />
+      <Chat handleClick={handleClick} handleInput={handleInput} handleModal={handleModal} setTexture={setTexture} handleOpen={handleOpen} />
 
       {isOpenModal ? (
 

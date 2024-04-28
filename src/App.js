@@ -9,11 +9,22 @@ import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import SelectFormPage from './pages/SelectFormPage';
+import { Component } from 'react';
+import SelectTexturePage from './pages/SelectTexture';
+import SignUp from './pages/SignUpPage';
+import SignInPage from './pages/SignInPage';
 
 const HOMEPAGE_ROUTE = "/"
 const MODEL_ROUTE="/3D"
 
 const SELECT_ROUTE="/SelectFigure"
+
+
+const SELECT_TEXTURE_ROUTE="/SelectTexture"
+
+const SIGN_UP_ROUTE = "/SignUp"
+
+const SIGN_IN_ROUTE = "/SignIn"
 const publicRoutes = [
   {
      path: HOMEPAGE_ROUTE,
@@ -26,6 +37,21 @@ const publicRoutes = [
   {
     path: SELECT_ROUTE,
     Component: SelectFormPage
+  },
+  {
+    path: SELECT_TEXTURE_ROUTE,
+    Component: SelectTexturePage
+  },
+
+  {
+    path: SIGN_UP_ROUTE,
+    Component: SignUp 
+  },
+  
+
+  {
+    path: SIGN_IN_ROUTE,
+    Component: SignInPage
   }
   
 

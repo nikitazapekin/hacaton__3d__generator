@@ -1,0 +1,139 @@
+.sign__up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+
+}
+
+.sign__content {
+
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    background: rgba(238, 238, 238, 0.4);
+    border-radius: 40px;
+    margin-top: 150px;
+}
+
+
+.sign__up__title {
+    font-size: 48px;
+}
+
+.form__input__img {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0 ;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sign__up__forms {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+}
+
+.sign__form {
+
+    max-width: 100%;
+    width: 100%;
+    height: 60px;
+  
+}
+
+.form__input__wrapper {
+
+    width: 100%;
+    position: relative;
+}
+
+.form__input {
+    width: 100%;
+
+    height: 60px;
+
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+ /*  
+ */
+}
+.form__input::placeholder {
+    
+    padding-left: 20px;
+}
+
+.form__title {
+    font-size: 24px;
+}
+
+.sign__up__btn {
+    padding: 20px 0;
+
+    font-weight: 300;
+    font-size: 24px;
+    color: #000;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.25);
+    background: rgba(71, 90, 73, 0.2);
+    border-radius: 20px;
+   position: relative;
+   cursor: pointer;
+   transition: 1s;
+
+   border: none;
+   outline: none;
+}
+.sign__up__btn:hover {
+    background-color: rgb(133, 7, 7);
+    letter-spacing: 0.7px;
+    color: #fff;
+}
+.or {
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/*
+
+.sel__text {
+    width: 206px;
+    height: 37px;
+    font-weight: 300;
+    font-size: 24px;
+    color: #000;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.25);
+    background: rgba(71, 90, 73, 0.2);
+    border-radius: 20px;
+   position: relative;
+   top: 23px;
+    cursor: pointer;
+    transition: 1s;
+    margin: 0 auto;
+    border: none;
+    outline: none;
+
+}
+
+
+
+.sel__text:hover {
+    background-color: rgb(133, 7, 7);
+    letter-spacing: 0.7px;
+    color: #fff;
+}
+
+
+*/

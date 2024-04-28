@@ -1,6 +1,6 @@
   body {
       background: linear-gradient(180deg, #D4E690 0%, #3F5245 100%);
-
+min-height: 100vh;
   }
   .page__wrapper {
     display: flex;
@@ -12,5 +12,10 @@
   .content__of__page {
     flex-grow: 1;
     width: 100%;
+
+  }
+
+  .testt {
+   /* min-height: 100vh; */
 
   }

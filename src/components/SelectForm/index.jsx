@@ -15,6 +15,8 @@ import Pic8 from "../../assets/figure/куббб-02 1.png"
 import Pic9 from "../../assets/figure/шар-01.png"
 
 import { useEffect, useState } from "react"
+
+import { Link } from "react-router-dom"
 import "./index.css"
 const SelectForm = () => {
 
@@ -108,9 +110,12 @@ const SelectForm = () => {
                     ) : (
                         <img src={Pic9} alt="figure" className="selected__figure" />
                     )}
+                        <Link style={{textDecoration: "none", color: "#38442a" }} to="/SelectTexture">
                     <button className="selected__btn">
+
                         Выбрать
                     </button>
+                        </Link>
                 </div>
             )}
         </div>

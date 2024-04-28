@@ -38,7 +38,8 @@ import { useEffect } from "react";
 import useGenerate from "../../hooks/useGenerate";
 import "./chatWith.css";
 import Logo from "../../assets/images/иконка.png"
-const ChatWithNetwotk = ({ imges, handleOpen, setTexture }) => {
+import Spinner from "../Spinner";
+const ChatWithNetwotk = ({ imges, handleOpen, setTexture , isLoading}) => {
 
     useEffect(() => {
         console.log(JSON.stringify("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" + JSON.stringify(imges)))
@@ -79,8 +80,10 @@ const ChatWithNetwotk = ({ imges, handleOpen, setTexture }) => {
                         </div>
                         </div>
     */}
+{isLoading  && (
 
-
+    <Spinner />
+)}
 
             {imges.map(item => (
                 <div className="message">

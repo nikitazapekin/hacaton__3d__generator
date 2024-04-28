@@ -5,7 +5,7 @@
     bottom: 0;
     height: auto;
 
- background-color: #38442A;
+ background-color: #8A9C6A;
     display: flex;
     justify-content: flex-end;
  padding-bottom: 41px; 
@@ -14,6 +14,49 @@
   
 }
 
+
+.chat__content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  height: 60px;
+padding-right: 40px;
+  column-gap: 60px;
+}
+
+.chat__input__image, .chat__picker__image, .chat__file__image, .chat__chat__image  {
+width: 50px;
+height: 50px;
+cursor: pointer;
+}
+
+.chat__input__wrapper {
+ column-gap: 10px;
+  width: 800px;
+  display: flex;
+}
+
+.chat__input {
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding-left: 20px;
+  border-radius: 20px;
+  font-size: 32px;
+}
+.chat__input__image {
+  position: relative;
+  top: 4px
+}
+
+.chat__input__color {
+  height: 50px;
+}
+.chat__file {
+  display: flex;
+}
 /*
 .chat__content {
     width: 100%;

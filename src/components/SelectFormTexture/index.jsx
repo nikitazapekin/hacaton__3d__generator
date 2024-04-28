@@ -14,9 +14,34 @@ import Pic7 from "../../assets/figure/+.png"
 import Pic8 from "../../assets/figure/куббб-02 1.png"
 import Pic9 from "../../assets/figure/шар-01.png"
 
+
+
+import Pic10 from "../../assets/textures/Rectangle 10.png"
+
+import Pic11 from "../../assets/textures/Rectangle 13.png"
+
+import Pic12 from "../../assets/textures/Rectangle 9.png"
+
+
+import Pic13 from "../../assets/textures/Rectangle 8.png"
+
+
+
+import Pic14 from "../../assets/textures/Rectangle 101.png"
+
+
+
+import Pic15 from "../../assets/textures/Rectangle 131.png"
+
+
+
+import Pic16 from "../../assets/textures/Rectangle 91.png"
+
+
+import Pic17 from "../../assets/textures/Rectangle 81.png"
 import { useEffect, useState } from "react"
 import "./index.css"
-const SelectForm = () => {
+const SelectFormText = () => {
 
     const [selectElement, setSelectElement] = useState()
     const handleSelect = (val) => {
@@ -31,7 +56,7 @@ const SelectForm = () => {
         <div className="select">
             <div className="select__content">
                 <h1 className="select__content__title">
-                    Выберите форму
+                    Выберите структуру
                 </h1>
                 <div className="search__wrapper">
                     <input type="text" className="select__search" placeholder="Поиск" />
@@ -39,34 +64,32 @@ const SelectForm = () => {
                 </div>
                 <div className="select__figures">
                     <div
-                        //className="select__figures__item" 
+
                         className={`select__figures__item ${selectElement == 1 ? `active__fig` : ``}`}
                         onClick={() => handleSelect(1)}>
                         <img src={Pic4} alt="figure"
-                        // className="select__figures__image"
-
-                        //  className={`select__figures__item ${selectElement==2 ? `active__fig` : ``}`}
+                            style={{ display: "none" }}
                         />
                         <p className="select__figure__text">
-                            Куб
+                            Дерево
                         </p>
                     </div>
                     <div
                         className={`select__figures__item ${selectElement == 2 ? `active__fig` : ``}`}
                         //className="select__figures__item"
                         onClick={() => handleSelect(2)}>
-                        <img src={Pic3} alt="figure" className="select__figures__image" />
+                        <img style={{ display: "none" }} src={Pic3} alt="figure" className="select__figures__image" />
                         <p className="select__figure__text">
-                            Шар
+                            Керамика
                         </p>
                     </div>
                     <div
                         className={`select__figures__item ${selectElement == 3 ? `active__fig` : ``}`}
                         //  className="select__figures__item"
                         onClick={() => handleSelect(3)}>
-                        <img src={Pic2} alt="figure" className="select__figures__image" />
+                        <img style={{ display: "none" }} src={Pic2} alt="figure" className="select__figures__image" />
                         <p className="select__figure__text">
-                            Пирамида
+                            Металл
                         </p>
                     </div>
                     <div
@@ -74,17 +97,17 @@ const SelectForm = () => {
                         className={`select__figures__item ${selectElement == 4 ? `active__fig` : ``}`}
                         //className="select__figures__item"
                         onClick={() => handleSelect(4)}>
-                        <img src={Pic5} alt="figure" className="select__figures__image" />
+                        <img style={{ display: "none" }} src={Pic5} alt="figure" className="select__figures__image" />
                         <p className="select__figure__text">
-                            Человек
+                            Стекло
                         </p>
                     </div>
                     <div // className="select__figures__item" 
                         className={`select__figures__item ${selectElement == 5 ? `active__fig` : ``}`}
                         onClick={() => handleSelect(5)}>
-                        <img src={Pic6} alt="figure" className="select__figures__image" />
+                        <img style={{ display: "none" }} src={Pic6} alt="figure" className="select__figures__image" />
                         <p className="select__figure__text">
-                            Танк
+                            Полимеры
                         </p>
                     </div>
                     <div
@@ -94,27 +117,51 @@ const SelectForm = () => {
                         onClick={() => handleSelect(6)}>
                         <img src={Pic7} alt="figure" className="select__figures__image" />
                         <p className="select__figure__text">
-                            Импортировать свою фигуру
+                            Импортировать свою структуру
                         </p>
                     </div>
                 </div>
             </div>
-            {selectElement && (
-                <div className="selected__element">
 
-                    {selectElement==1 ? (
 
-                        <img src={Pic8} alt="figure" className="selected__figure" />
-                    ) : (
-                        <img src={Pic9} alt="figure" className="selected__figure" />
-                    )}
-                    <button className="selected__btn">
-                        Выбрать
-                    </button>
+{
+    selectElement && (
+
+        <div className="select__texture__element">
+                <p className="select__texture__title">
+                    Выберите подходящий вариант:
+                </p>
+
+{
+    selectElement==1 ? (
+
+        <div className="select__textures">
+                    <img src={Pic10} alt="texture" className="sel__texture" />
+                    <img src={Pic11} alt="texture" className="sel__texture" />
+                    <img src={Pic12} alt="texture" className="sel__texture" />
+                    <img src={Pic13} alt="texture" className="sel__texture" />
                 </div>
-            )}
+                ) :
+
+                (
+
+                    <div className="select__textures">
+                    <img src={Pic14} alt="texture" className="sel__texture" />
+                    <img src={Pic15} alt="texture" className="sel__texture" />
+                    <img src={Pic16} alt="texture" className="sel__texture" />
+                    <img src={Pic17} alt="texture" className="sel__texture" />
+                </div>
+                )
+            }
+
+                <button className="sel__text">
+                    Показать еще +
+                </button>
+            </div>
+        
+    )}
         </div>
     );
 }
 
-export default SelectForm;
+export default SelectFormText;
